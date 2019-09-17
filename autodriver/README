@@ -1,0 +1,39 @@
+This directory is copied from github.com/xyzisinus/Tango, a fork of
+the Autolab project (github.com/autolab).  It's not part of the
+grading container but serves as a reference to the operations on the
+grading VM.  The grading VM should be Autolab-ready, i.e. capable of
+running an Autolab grading job.
+
+If you already have an Autolab-ready grading vm image, you don't need
+to be concerned with the files in this directory.  Otherwise please
+read on.
+
+To key to being an Autolab-ready grading machine is for the VM to
+have the autodriver executable.  This program assumes that the top
+level Makefile for the grading job has been shipped to the VM and
+starts the grading sequence from executing that Makefile.
+
+To build a grading vm image for Autolab jobs:
+
+* Create a vm with a stock linux image
+* Copy autodriver.c and Makefile to the vm and compile it to autodriver
+* Copy autodriver to any common path, make it owned by root wtih setuid bits.
+  For example: -rwsr-sr-x 1 root root /usr/bin/autodriver
+
+* Create the following users
+  autolab: The ssh/scp user tied with selected key pair of you cloud account
+  autograde: The user to run TA's grader starting from the top Makefile (see autodriver.c)
+  student: For students to use the exact image for coding/testing
+
+The sequence of grading using the above image is such:
+
+The grading engine: scp top level Makefile and autograde.tar (both
+made by course staff), and student's submission to the grading vm.
+
+The grading engine: ssh to run autodriver program.
+
+The greating vm: autodriver program (running as root because of the
+setuid bit) starts a child process (running as user autograde) to run
+"make" with top level Makefile.
+
+The grading engine: scp the output file from the grading vm.
