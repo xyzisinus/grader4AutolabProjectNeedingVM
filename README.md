@@ -20,35 +20,34 @@ current-day grading systems.
 Some Autolab grader/submission pairs, however, require the environment
 of a VM instead of a container to execute. For example, a programming
 project may need FUSE filesystems or privileged mode.  For the purpose
-of re-using those valuable VM-dependent Autolab graders in a
-container-based grading system we have built this package, referred as
-the Grader Container below.
+of re-using those valuable VM-required Autolab graders in a
+container-based grading system we have built this program, referred as
+the Grader below.
 
-The Grader Container creates a VM (AWS EC2 Instance), copies an
+The Grader creates a VM (AWS EC2 Instance), copies an
 Autolab grader/submission pair to the VM and executes it.  After the
-execution the container copies the log file and grades from the VM to
-a specified file system or a cloud storage location.  Although the
-Grader Container is made for the AWS cloud it can be used in
+execution the Grader copies the log file and grades from the VM to
+a specified file location.  Although the
+Grader is made for the AWS cloud it can be used in
 another public cloud with minor modifications.
 
-In essence, the Grader Container is a general purpose grader.  It is
-not made for a specific course/project.  It is designed to be deployed
+In essence, the Grader is not specific for a particular course/project but 
+a general purpose grader.  It is designed to be deployed
 in a container-based grading system and to run on a VM any Autolab
 grader/submission appropriately configured in its environment.
 
-If you are a teaching staff with existing VM-dependent Autolab graders
+If you are a teaching staff with existing VM-required Autolab graders
 and look to adapting your graders to the environment of a
-container-based grading system, the Grader Container may be useful to you.
+container-based grading system, the Grader may be useful to you.
 
 ### Adapting to a grading system (for teaching staff)
 
-##### Quick look at the container
+##### Quick look at the Grader
 
-To adjust the Grader Container for your chosen grading system, it's
-useful to have a quick look at the container.  The Grader Container
-executes a python program grader.py. The program assumes
-there is a directory, defined under "volumes:" in
-./docker-compose.yml, that should typically contain the following
+To adjust the Grader for your chosen grading system, it's
+useful to have a quick look at the Grader.  The Grader
+is a python program grader.py. The program assumes
+there is a directory, /var/run/grader, that should typically contain the following
 files:
 
 |     filename            |                 description                   |
@@ -60,7 +59,7 @@ files:
 |`config.yaml`            |see sample file below                          |
 
 
-The container's *execution* generates two more files there:
+The Grader's *execution* generates two more files there:
 
 |  filename  |          description                |
 |------------|-------------------------------------|
@@ -91,10 +90,9 @@ SECURITY_KEY_NAME: key_name
 SECURITY_KEY_PATH: /var/run/grader/grader_vm.pem  (.pem file matching key_name)
 ```
 
-To build and run the container:
+With the above setup complete, simply run the Grader:
 ```
-docker-compose build
-docker-compose up
+python3 grader.py
 ```
 
 ##### Assumptions and adjustments
@@ -109,27 +107,26 @@ couple of considerations on the cloud account administration:
    * AWS recommends using IAM users rather than root account.
    * You may also need to request an increase of max simultaneous instances of
 the type you are using.
-   * This grader package tries hard to terminate the instance it creates, but it's good to check your EC2 console for "stray" instances.
+   * This grader package tries hard to terminate the instance and security group it creates, but it's good to check your EC2 console for "stray" instances and security groups.
 
 * An VM image (AMI) capable of grading Autolab jobs, see
   ./autodriver/README for details.
   *  The image belongs to the same AWS account and has
 a tag keyed with "Name" and with the value of IMAGE_TAG.  Use quotes for IMAGE_TAG in config.yaml
 
-Adjustments and additions needed to fit the Grader Container into the
+Adjustments and additions needed to fit the Grader into the
 grading system:
 
-* Determine the location of the input/output files.  The Grader Container
-assumes they are all in one directory mounted inside the container at
+* Determine the location of the input/output files.  The Grader
+assumes they are all in one directory
 /var/run/grader.  But depending on the grading systm, this will be
-different.  That means modifications to docker-compose.yml and maybe
-to grader.py, too.
+different. 
 
 * Provide a script/program to the grading system as the entry point of the
 grading process.  The script does the following:
 
   - Assemble the audograde.tar/Makefile and student file to the determined locations.
   - Generate the config.yaml file to reflect the environment and configuration.
-  - Build and run the container.
+  - Run grader.py.
   - Parse the scores at the end of the generated output file to the specifications of the grading system.
   - Move the output file and log file to the locations specific to the grading system.
