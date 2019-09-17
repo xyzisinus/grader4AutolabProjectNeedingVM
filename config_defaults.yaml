@@ -1,0 +1,65 @@
+# Default config.  Attributes except one Can be overridden by those
+# in <passedInDir>/config.ymal.
+# All null attributes must be present in <passedInDir>/config.yaml.
+
+# Where config.yaml can be found.
+# The ONLY attribute that can't be overridden.
+passedInDir: /var/run/grader
+
+# inputFiles takes the form
+# inputFiles:
+#   - {"src": srcFile, "dest": desFile}
+#   - {"src": srcFile, "dest": desFile}
+# src: file name in passedInDir
+# dest: file name copied to the grader vm
+inputFiles: null
+
+SUBMISSION_ID: null
+IMAGE_TAG: null
+
+# Timer polling interval used by timeout() function
+TIMER_POLL_INTERVAL: 5
+
+# Worker waits this many seconds for functions waitvm, copyin (per
+# file), runjob, and copyout functions to finish.
+INITIALIZEVM_TIMEOUT: 120
+WAITVM_TIMEOUT: 120
+COPYIN_TIMEOUT: 180
+RUNJOB_TIMEOUT: 1200
+COPYOUT_TIMEOUT: 120
+
+# time zone for logs
+TIMEZONE: UTC
+
+# Maximum size for output file in bytes
+MAX_OUTPUT_FILE_SIZE: 500 * 1024
+
+# autodriver is the term for the kind of vm image that is capable of
+# of grading for Autolab assessment:  It has the autodriver program
+# (see ./autodriver/README)
+# The following set of config variables are related that kind of vm.
+
+# how often (seconds) to insert timestamps in output file on grading vm
+AUTODRIVER_TIMESTAMP_INTERVAL: 10
+
+# VM ulimit values
+VM_ULIMIT_FILE_SIZE: 100 * 1024 * 1024
+VM_ULIMIT_USER_PROC: 100
+
+# do not terminate the grading vm (for debugging)
+KEEP_VM_AFTER_FAILURE: false
+
+# the ssh user name for the vm
+AUTODRIVER_USER_NAME: autolab
+
+# ec2 related
+EC2_REGION: us-east-1
+EC2_INST_TYPE: t2.small
+
+# for boto3
+ACCESS_KEY_ID: null
+SECRET_ACCESS_KEY: null
+
+# for ssh
+SECURITY_KEY_NAME: null
+SECURITY_KEY_PATH: null
