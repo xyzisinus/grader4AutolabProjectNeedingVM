@@ -20,7 +20,7 @@ current-day grading systems.
 Some Autolab grader/submission pairs, however, require the environment
 of a VM instead of a container to execute. For example, a programming
 project may need FUSE filesystems or privileged mode.  For the purpose
-of re-using those valuable VM-required Autolab graders in a
+of re-using those valuable VM-dependent Autolab graders in a
 container-based grading system we have built this program, referred as
 the Grader below.
 
@@ -36,7 +36,7 @@ a general purpose grader.  It is designed to be deployed
 in a container-based grading system and to run on a VM any Autolab
 grader/submission appropriately configured in its environment.
 
-If you are a teaching staff with existing VM-required Autolab graders
+If you are a teaching staff with existing VM-dependent Autolab graders
 and look to adapting your graders to the environment of a
 container-based grading system, the Grader may be useful to you.
 
