@@ -107,11 +107,10 @@ couple of considerations on the cloud account administration:
    * AWS recommends using IAM users rather than root account.
    * You may also need to request an increase of max simultaneous instances of
 the type you are using.
-   * This grader package tries hard to terminate the instance and security group it creates, but it's good to check your EC2 console for "stray" instances and security groups.
+   * The Grader tries hard to terminate the instance and security group it creates, but it's good to check your EC2 console for "stray" instances and security groups.
 
 * An VM image (AMI) capable of grading Autolab jobs, see
-  ./autodriver/README for details.
-  *  The image belongs to the same AWS account and has
+  ./autodriver/README for details. The image belongs to the same AWS account and has
 a tag keyed with "Name" and with the value of IMAGE_TAG.  Use quotes for IMAGE_TAG in config.yaml
 
 Adjustments and additions needed to fit the Grader into the
