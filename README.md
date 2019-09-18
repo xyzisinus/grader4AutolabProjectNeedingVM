@@ -40,6 +40,8 @@ If you are a teaching staff with existing VM-dependent Autolab graders
 and look to adapting your graders to the environment of a
 container-based grading system, the Grader may be useful to you.
 
+##### Update: An [Gradescope grader](https://github.com/xyzisinus/GradescopeGrader4Autolab) has been built with the Grader at its core to run made-for-Autolab graders.
+
 ### Adapting to a grading system (for teaching staff)
 
 ##### Quick look at the Grader
