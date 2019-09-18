@@ -49,7 +49,7 @@ container-based grading system, the Grader may be useful to you.
 To adjust the Grader for your chosen grading system, it's
 useful to have a quick look at the Grader.  The Grader
 is a python program grader.py. The program assumes
-there is a directory, /var/run/grader, that should typically contain the following
+there is a directory, `/var/run/grader`, that should typically contain the following
 files:
 
 |     filename            |                 description                   |
@@ -131,3 +131,13 @@ grading process.  The script does the following:
   - Run grader.py.
   - Parse the scores at the end of the generated output file to the specifications of the grading system.
   - Move the output file and log file to the locations specific to the grading system.
+  
+### Build a Docker container for testing
+ 
+To test how the Grader works in tandem with your existing Autolab grader, you can run grader.py with the appropriate setup, especially the content of `/var/run/grader`. You can also build a Docker container to encompass the environment using the Docker files provided in this repository.  To take that approach, first copy the files that should be in `/var/run/grader` (see above **Quick look at the Grader**) to `/var/run/outside_grader_container`.  Then
+```
+docker-compose build
+docker-compose up
+```
+The container's progress can be monitored by watching the files, grader.log, output, and results.json under /var/run/GradescopeGrader on the host machine without having to dive into the container.
+
