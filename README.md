@@ -10,7 +10,7 @@ containers to run in a different grading system, such as one of the
 following -- the list is by no means comprehensive.
 
 * [Diderot by CMU](http://www.umut-acar.org/home#diderot)
-* [Gradescope Autograder](https://gradescope-autograders.readthedocs.io/en/latest/). I have build a [general grader](https://github.com/xyzisinus/GradescopeGrader4Autolab) to run any made-for-Autolab grader with Gradescope.
+* [Gradescope Autograder](https://gradescope-autograders.readthedocs.io/en/latest/). The code in this repository has been utilized to build a [general grader](https://github.com/xyzisinus/GradescopeGrader4Autolab) to run any made-for-Autolab grader with Gradescope.
 * The Project Zone by CMU: Contact Majd Sakr at cs.cmu.edu/~msakr
 
 Those systems are container-based, that is, they run the
@@ -132,10 +132,10 @@ grading process.  The script does the following:
   
 ### Build a Docker container for testing
  
-To test how the Grader works in tandem with your existing Autolab grader, you can run grader.py with the appropriate setup, especially the content of `/var/run/grader`. You can also build a Docker container to encompass the environment using the Docker files provided in this repository.  To take that approach, first copy the files that should be in `/var/run/grader` (see above **Quick look at the Grader**) to `/var/run/outside_grader_container`.  Then
+To test how the Grader works in tandem with your existing Autolab grader, you can run `grader.py` with the appropriate setup, mainly the content of `/var/run/grader` (see the section **Quck look at the Grader**). You can also build a Docker container, using the Docker files provided in this repository, to encompass the execution environment.  To take that approach, first copy the files that should be in `/var/run/grader` (see above **Quick look at the Grader**) to `/var/run/outside_grader_container`.  Then
 ```
 docker-compose build
 docker-compose up
 ```
-The Grader's progress can be monitored by watching the files, grader.log and output, under /var/run/outside_grader_container on the host machine.  With that, most of your trouble shooting can be done without diving into the container.
+The Grader's progress can be monitored by watching the files, `grader.log` and `outpu`t, under `/var/run/outside_grader_container` on the host machine.  With that, most of your trouble shooting can be done without diving into the container.
 
