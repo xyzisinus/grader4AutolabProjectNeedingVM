@@ -9,8 +9,8 @@ computing, some Autolab grader/submission pairs have been packaged as
 containers to run in a different grading system, such as one of the
 following -- the list is by no means comprehensive.
 
-* Diderot by CMU: http://www.umut-acar.org/home#diderot
-* Gradescope Autograder: https://gradescope-autograders.readthedocs.io/en/latest/ (Andy Pavlo is a user.)
+* [Diderot by CMU](http://www.umut-acar.org/home#diderot)
+* [Gradescope Autograder](https://gradescope-autograders.readthedocs.io/en/latest/). I have build a [general grader](https://github.com/xyzisinus/GradescopeGrader4Autolab) to run any made-for-Autolab grader with Gradescope.
 * The Project Zone by CMU: Contact Majd Sakr at cs.cmu.edu/~msakr
 
 Those systems are container-based, that is, they run the
@@ -39,8 +39,6 @@ grader/submission appropriately configured in its environment.
 If you are a teaching staff with existing VM-dependent Autolab graders
 and look to adapting your graders to the environment of a
 container-based grading system, the Grader may be useful to you.
-
-##### Update: An [Gradescope grader](https://github.com/xyzisinus/GradescopeGrader4Autolab) has been built with the Grader at its core to run made-for-Autolab graders.
 
 ### Adapting to a grading system (for teaching staff)
 
