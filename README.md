@@ -139,5 +139,5 @@ To test how the Grader works in tandem with your existing Autolab grader, you ca
 docker-compose build
 docker-compose up
 ```
-The container's progress can be monitored by watching the files, grader.log, output, and results.json under /var/run/GradescopeGrader on the host machine without having to dive into the container.
+The Grader's progress can be monitored by watching the files, grader.log and output, under /var/run/outside_grader_container on the host machine.  With that, most of your trouble shooting can be done without diving into the container.
 
