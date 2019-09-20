@@ -1,6 +1,8 @@
+**Acknowledgement**: The core code of this repository is pulled from the [original Autolab project](https://github.com/autolab) and [one of its forks](https://github.com/xyzisinus/Tango).
+
 ### Quick introduction
 
-Autolab (github.com/autolab) is an auto-grading system created at CMU.
+[Autolab](https://github.com/autolab) is an auto-grading system created at CMU.
 Over the years, many courses inside and outside CMU have used it as a
 grading platform and a large collection of graders have been
 developed.  A grader is a program that drives the student submitted
