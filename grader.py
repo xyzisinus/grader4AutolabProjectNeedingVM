@@ -471,7 +471,7 @@ class Grader():
             self.appendMsg("FOUND output of autodriver from grading VM:\n")
             f1 = open(self.output, "a")
             # append grading vm's output to output
-            with open(self.tmpOutput, "r") as f2:
+            with open(self.tmpOutput, "r", encoding="ISO-8859-1") as f2:
                 shutil.copyfileobj(f2, f1)
             os.remove(self.tmpOutput)
             f1.close()
