@@ -22,8 +22,6 @@ import atexit
 import boto3
 from botocore.exceptions import ClientError
 
-startTime = time.strftime("%Y-%m-%dT%H-%M-%S", time.localtime())
-
 # global config.  See config_defaults.yaml for attributes.
 config = None
 
@@ -503,6 +501,8 @@ class Grader():
 
             global cloudConnector
             cloudConnector = Ec2()
+
+            startTime = time.strftime("%Y-%m-%dT%H-%M-%S", time.localtime())
 
             global vm
             vm = VM()
