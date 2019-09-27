@@ -17,6 +17,12 @@ inputFiles: null
 SUBMISSION_ID: null
 IMAGE_TAG: null
 
+SUBMISSION_FILENAME: null
+# Top directory name, if submission is a tar file.
+# With this knowledge the bridging grader knows how to make the
+# right kind of tar from a git repo.
+SUBMISSION_TAR_TOP_DIRNAME: src
+
 # Timer polling interval used by timeout() function
 TIMER_POLL_INTERVAL: 5
 

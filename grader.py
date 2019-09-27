@@ -22,6 +22,8 @@ import atexit
 import boto3
 from botocore.exceptions import ClientError
 
+startTime = time.strftime("%Y-%m-%dT%H-%M-%S", time.localtime())
+
 # global config.  See config_defaults.yaml for attributes.
 config = None
 
@@ -30,7 +32,7 @@ cloudConnector = None
 
 # vm of class VM.  make it global for cross-object reference.
 vm = None
-secGroup = "exp_sec_group_" + str(time.time())
+secGroup = None
 secGroupID = None
 
 # exit and exception final handler.
@@ -469,12 +471,18 @@ class Grader():
         # output from grading may not exist
         if os.path.exists(self.tmpOutput):
             self.appendMsg("FOUND output of autodriver from grading VM:\n")
-            f1 = open(self.output, "a")
-            # append grading vm's output to output
-            with open(self.tmpOutput, "r", encoding="ISO-8859-1") as f2:
-                shutil.copyfileobj(f2, f1)
-            os.remove(self.tmpOutput)
-            f1.close()
+            try:
+                with open(self.output, "a",
+                          encoding='utf-8',
+                          errors='backslashreplace') as f1:
+                    # append grading vm's output to output
+                    with open(self.tmpOutput, "r",
+                              encoding="utf-8",
+                              errors='backslashreplace') as f2:
+                        shutil.copyfileobj(f2, f1)
+                    os.remove(self.tmpOutput)  # remove when copying succeeds
+            except Exception as err:
+                self.appendMsg("exception in appending output: %s" % err)
         else:
             self.appendMsg("NO OUTPUT FILE FROM GRADING VM\n")
 
@@ -499,8 +507,11 @@ class Grader():
             global vm
             vm = VM()
             vm.image_tag = config.IMAGE_TAG
-            vm.name = "vm_" + config.SUBMISSION_ID
+            vm.name = "vm_%s_%s" % (config.SUBMISSION_ID, startTime)
             vm.instance_type = config.EC2_INST_TYPE
+
+            global secGroup
+            secGroup = "secGroup_%s_%s" % (config.SUBMISSION_ID, startTime)
 
             # the call will exit on exception
             cloudConnector.initializeVM()
