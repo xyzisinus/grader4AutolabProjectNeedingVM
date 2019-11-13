@@ -12,7 +12,7 @@ containers to run in a different grading system, such as one of the
 following -- the list is by no means comprehensive.
 
 * [Diderot by CMU](http://www.umut-acar.org/home#diderot)
-* [Gradescope Autograder](https://gradescope-autograders.readthedocs.io/en/latest/). The code in this repository has been utilized to build a [general grader](https://github.com/xyzisinus/GradescopeGrader4Autolab) to run any made-for-Autolab grader with Gradescope.
+* [Gradescope Autograder](https://gradescope-autograders.readthedocs.io/en/latest/). The code in this repository has been utilized to build a [bridging grader](https://github.com/xyzisinus/GradescopeGrader4Autolab) to run any made-for-Autolab grader with Gradescope.
 * The Project Zone by CMU: Contact [Majd Sakr](https://www.cs.cmu.edu/~msakr/) or [TEEL Lab](http://teel.cs.cmu.edu/).
 
 Those systems are container-based, that is, they run the
